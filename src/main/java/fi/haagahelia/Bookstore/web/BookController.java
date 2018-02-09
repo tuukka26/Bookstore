@@ -38,4 +38,12 @@ public class BookController {
 		repository.save(book);
 		return "redirect:index";
 	}
+	
+	@RequestMapping("/edit/{id}")
+	public String editBook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("book", repository.findOne(bookId));
+		return "editbook";
+	}
+	
+	
 }
