@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Server Programming with Spring Boot</title>
+<title>Edit book</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 </head>
@@ -11,7 +11,7 @@
 	<div class="container">
 	<h1>Edit book</h1>
 	<div>
-		<form th:object="${book}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${book}" th:action="@{../savebook}" action="#" method="post">
 			<input type="hidden" th:field="*{id}" class="form-control"/>
 			<div class="form-group">
 				<label for="title">Book title</label>
@@ -33,7 +33,13 @@
 				<label for="price">Price (€)</label>
 				<input class="form-control" type="text" th:field="*{price}" />
 			</div>
+			<div class="form-group">
+				<select id="catlist" th:field="*{category}">
+					<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
+				</select>
+			</div>
 			<input type="submit" class="btn btn-success" value="Save"></input>
+			<a class="btn btn-warning" th:href="@{/index}">Cancel</a>
 		</form>
 	</div>
 </div>
