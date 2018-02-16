@@ -1,5 +1,8 @@
 package fi.haagahelia.Bookstore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +15,7 @@ import fi.haagahelia.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -21,6 +25,7 @@ public class BookstoreApplication {
 	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepository) {
 		return (args) -> {
 			
+			log.info("Save a few categories and books");
 			Category c1 = new Category("Fiction");
 			Category c2 = new Category("Satire");
 			Category c3 = new Category("Beat generation");
@@ -36,6 +41,11 @@ public class BookstoreApplication {
 			repository.save(book1);
 			repository.save(book2);
 			repository.save(book3);
+			
+			log.info("Fetch all books");
+			for (Book book : repository.findAll()) {
+				log.info(book.toString());
+			}
 		};
 	}
 }

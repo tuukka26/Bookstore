@@ -23,19 +23,28 @@ public class BookController {
 	
 	@Autowired
 	CategoryRepository crepository;
-
-	@RequestMapping("/index")
+	
+	// Login screen
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}
+	
+	// Show all books
+	@RequestMapping("/booklist")
 	public String books(Model model) {
 		model.addAttribute("books", repository.findAll());
 		return "booklist";
 	}
 	
+	// Delete book
 	@RequestMapping("/delete/{id}")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		repository.delete(bookId);
-		return "redirect:../index";
+		return "redirect:../booklist";
 	}
 	
+	// Add book
 	@RequestMapping("/addbook")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
@@ -43,6 +52,7 @@ public class BookController {
 		return "addbook";
 	}
 	
+	// Add category
 	@RequestMapping("/addcat")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new Category());
@@ -50,18 +60,21 @@ public class BookController {
 		
 	}
 	
+	// Save book
 	@RequestMapping("/savebook")
 	public String saveBook(Book book) {
 		repository.save(book);
-		return "redirect:index";
+		return "redirect:booklist";
 	}
 	
+	// Save category
 	@RequestMapping("/savecat")
 	public String saveCat(Category category) {
 		crepository.save(category);
-		return "redirect:index";
+		return "redirect:booklist";
 	}
 	
+	// Edit student
 	@RequestMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", repository.findOne(bookId));
@@ -69,12 +82,14 @@ public class BookController {
 		return "editbook";
 	}
 	
+	// RESTful service to get all books
 	@RequestMapping(value="/books", method=RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest() {
 		
 		return (List<Book>) repository.findAll();
 	}
 	
+	// RESTful service to get book by id
 	@RequestMapping(value="/book/{id}", method=RequestMethod.GET)
 	public @ResponseBody Book findBookRest(@PathVariable("id") Long bookId) {
 		
