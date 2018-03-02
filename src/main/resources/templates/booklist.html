@@ -44,13 +44,13 @@
 				<td th:text="${book.year}"></td>
 				<td th:text="${book.price}"></td>
 				<td th:text="${book.category.name}"></td>
-				<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-				<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a sec:authorize="hasRole('ADMIN')" class="btn btn-success" th:href="@{/addbook}">Add Book</a>
-	<a sec:authorize="hasRole('ADMIN')" class="btn btn-success" th:href="@{/addcat}">Add Category</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/addbook}">Add Book</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/addcat}">Add Category</a>
 	</div>
 </body>
 </html>

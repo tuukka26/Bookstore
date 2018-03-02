@@ -2,12 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title>Spring Security Example </title>
+        <title>Spring Bookstore Application </title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />    
     </head>
     <body>
     	<div class="container">
+    				<h3>
+					  Bookstore application
+					  <small class="text-muted">HH UAS Server Programming Course, Spring 2018</small>
+					</h3>
         			<div th:if="${param.error}" class="form-group">
             			<p>Invalid username and password.</p>
         			</div>
@@ -16,7 +20,7 @@
 			        </div>
 			        <form th:action="@{/login}" method="post">
 			        <div class="form-group">
-			         	<label for="username"> User Name : <input type="text" name="username" class="form-group" /> </label>
+			         	<label for="username"> Username: <input type="text" name="username" class="form-group" /> </label>
 			        </div>
 			        <div class="form-group">
 			            <label for="password"> Password: <input type="password" name="password" class="form-group" /> </label>
